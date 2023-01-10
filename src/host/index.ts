@@ -1,5 +1,6 @@
 
 import { ipcMain} from 'electron';
+import read from './common/read';
 
 export default (win:any)=>{
     // 窗口最小化
@@ -22,5 +23,7 @@ export default (win:any)=>{
       win.hide();
       win.close();
     });
+
+    read(win);
 
 }
