@@ -2,7 +2,7 @@
   <div class="layout">
     <div class="layout-header">
       <!-- 头部 -->
-      <Header />
+      <HeaderItem />
     </div>
     <aside class="layout-sidebar sidebar-none">
       <!-- 侧边栏 -->
@@ -10,28 +10,34 @@
     </aside>
     <main class="page">
       <div class="layout-box">
-        <!-- 主要内容 -->456
-        <router-view />
+        <!-- 主要内容 -->
+        <router-view :key="key" />
       </div>
     </main>
   </div>
 </template>
 
 <script lang='ts'>
-import Header from "@/layout/common/header.vue";
+import HeaderItem from "@/layout/common/header-item.vue";
 import Sidebar from "@/layout/common/sidebar.vue";
 import { defineComponent, reactive, toRefs } from "vue";
+import { useRoute } from 'vue-router';
 
 export default defineComponent({
   name: "",
   components: {
-    Header,
+    HeaderItem,
     Sidebar,
   },
   setup(props: any, { emit }: { emit: any }) {
     const data = reactive({});
+    const route = useRoute();
+    const key = () => {
+      return route.path;
+    };
     return {
       ...toRefs(data),
+      key
     };
   },
 });
@@ -45,25 +51,25 @@ export default defineComponent({
   }
 
   .layout-sidebar {
-    font-size: 16px;
-    background-color: #fff;
     position: fixed;
+    left: 0;
+    top: 50px;
+    bottom: 0;
     z-index: 10;
     margin: 0;
-    top: 50px;
-    left: 0;
-    bottom: 0;
     box-sizing: border-box;
     border-right: 1px solid #eaecef;
     overflow-y: auto;
-    width: 250px;
+    width: 150px;
+    font-size: 16px;
+    background-color: #fff;
   }
 
   .page {
-    margin-left: 250px;
+    margin-left: 150px;
+    height: calc(100vh - 52px) !important;
 
     .layout-box {
-      height: auto !important;
       margin: 0 auto;
     }
   }

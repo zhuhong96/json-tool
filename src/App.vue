@@ -8,7 +8,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #d60000;
+  color: #00adb5;
+  background-color: #eeeeee;
 }
 body,
 html {

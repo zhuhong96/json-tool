@@ -2,7 +2,7 @@
   <header class="navber">
     <div class="navber-header">
       <div class="header-title">
-        处理工具
+        JSON处理工具
       </div>
       <div class="header-tool">
         <el-icon size="20px" color="#000" @click="minsize">
