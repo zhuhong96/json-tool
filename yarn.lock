@@ -6650,6 +6650,11 @@ mdn-data@2.0.14:
   resolved "https://registry.npmmirror.com/mdn-data/-/mdn-data-2.0.14.tgz#7113fc4281917d63ce29b43446f701e68c25ba50"
   integrity sha512-dn6wd0uw5GsdswPFfsgMp5NSB0/aDe6fK94YJV/AJDYXL6HVLWBsxeq7js7Ad+mU2K9LAlwpk6kN2D5mwCPVow==
 
+meansjs@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.npmmirror.com/meansjs/-/meansjs-1.0.8.tgz#93a535f97e089d4b724896b43e74ac876dcad844"
+  integrity sha512-GqoiaM09UnP3+qDSK2jmyAIL18kQkmfYD/ophwJyiVxJ7YWFr7zcYQknSu+UiFeHwcoGrDzxehWJhgAQHoMUHA==
+
 media-typer@0.3.0:
   version "0.3.0"
   resolved "https://registry.npmmirror.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"

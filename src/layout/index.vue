@@ -71,6 +71,7 @@ export default defineComponent({
 
     .layout-box {
       margin: 0 auto;
+      height: 100%;
     }
   }
 }
