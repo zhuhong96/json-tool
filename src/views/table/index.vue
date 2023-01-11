@@ -5,7 +5,7 @@
         共【{{table.length}}】条数据
       </div>
       <div class="table-tool-but">
-        <el-button type="warning">导出表格</el-button>
+        <el-button type="warning" @click="setExportForm">导出表格</el-button>
         <el-button type="danger" @click="setReset">重置</el-button>
       </div>
     </div>
@@ -143,6 +143,10 @@ export default defineComponent({
     const setReset = () => {
       data.isTableShoww = true;
       data.table = [];
+    };
+    // 导出表格
+    const setExportForm = () => {
+      console.log(document.querySelector('table'));
     }
 
     // 每页条数
@@ -170,7 +174,8 @@ export default defineComponent({
       onChange,
       tableSizeChange,
       tableCurrentChange,
-      setReset
+      setReset,
+      setExportForm
     };
   },
 });
