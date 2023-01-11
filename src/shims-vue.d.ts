@@ -6,3 +6,5 @@ declare module '*.vue' {
 }
 
 declare module 'meansjs'; // 示列
+declare module 'file-saver'; 
+declare module 'xlsx'; 

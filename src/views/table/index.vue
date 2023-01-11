@@ -16,6 +16,7 @@
         multiple
         action=""
         :auto-upload="false"
+        :show-file-list="false"
         :on-change="onChange"
       >
         <el-icon class="el-icon--upload"><upload-filled /></el-icon>
@@ -49,7 +50,11 @@
 import { ipcRenderer } from "electron";
 import { defineComponent, reactive, toRefs } from "vue";
 import meansJs from "meansjs";
-import { ElMessage } from 'element-plus'
+import { ElMessage } from 'element-plus';
+import FileSaver from 'file-saver'
+// import XLSX from 'xlsx'
+
+import * as XLSX from 'xlsx'
 
 export default defineComponent({
   name: "",
@@ -58,6 +63,8 @@ export default defineComponent({
       isTableShoww: true,
       // 数组
       table: [] as [],
+      // 文件名称
+      fileName:'',
       pageSize:10 as number,
       page:1 as number,
     });
@@ -82,7 +89,7 @@ export default defineComponent({
           html +=
             `
           <td style="border: 1px solid #393e46; min-width: 40px;
-          outline: none;padding: 10px;
+          outline: none;padding: 10px; font-size: 16px;
           ">
           ` +
             "序号" +
@@ -141,12 +148,38 @@ export default defineComponent({
 
     // 重置
     const setReset = () => {
-      data.isTableShoww = true;
+      html = `<table style="border-collapse: collapse;">`;
       data.table = [];
+      const table:any = document.querySelector('table');
+      table.remove();
+      data.isTableShoww = true;
+      
     };
     // 导出表格
     const setExportForm = () => {
-      console.log(document.querySelector('table'));
+      // xls、xlsx
+      // console.log(document.querySelector('table'));
+      if (!document.querySelector('table')) {
+        return ElMessage.error('暂无表格，请导入JSON');
+      };
+      const wb = XLSX.utils.table_to_book(document.querySelector('table'))
+      /* #table 就是表格的id */
+      const wbout = XLSX.write(wb, {
+        bookType: 'xlsx',
+        bookSST: true,
+        type: 'array'
+      })
+      try {
+        FileSaver.saveAs(
+          new Blob([wbout], { type: 'application/octet-stream' }),
+          `${data.fileName}.xlsx`
+        )
+      } catch (e) {
+        if (typeof console !== 'undefined') {
+          console.log(e, wbout)
+        }
+      }
+      return wbout;
     }
 
     // 每页条数
@@ -163,8 +196,17 @@ export default defineComponent({
     // 监听上传文件
     const onChange = (file: any, fileList: any) => {
       if (file.size >= '1048576') {
-        return ElMessage.error('JSON文件不得大于1M')
+        return ElMessage.error('JSON文件不得大于1M');
       };
+
+      const name = file.name;
+
+      const fileIndex = name.lastIndexOf('.');
+      const fileType = name.substring(fileIndex+1);
+      if (fileType !== 'json') return ElMessage.error('请上传JSON单文件');
+      
+      data.fileName = name;
+      
       // data.path = file.raw.path;
       ipcRenderer.send("reader-json-file", file.raw.path);
       data.isTableShoww = false;
