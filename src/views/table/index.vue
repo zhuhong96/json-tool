@@ -2,7 +2,7 @@
   <div class="table-file">
     <div class="table-tool">
       <div class="table-tool-data">
-        共【{{table.length}}】条数据-
+        共【{{table.length}}】条数据
       </div>
       <div class="table-tool-but">
         <el-button type="warning" @click="setExportForm">导出表格</el-button>
