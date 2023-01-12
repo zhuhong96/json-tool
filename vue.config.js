@@ -23,12 +23,12 @@ module.exports = defineConfig({
         // 解决的问题：在安装到电脑后，系统通知无法工作
         appId: "com.zhuhong.json-toll",
         productName: "JSON工具",
-        // publish: [
-        //   {
-        //     provider: "generic",
-        //     url: process.env.VUE_APP_HOT_UPDATE, // 根目录
-        //   },
-        // ],
+        publish: [
+          {
+            provider: "generic",
+            url: process.env.VUE_APP_HOT_UPDATE, // 根目录
+          },
+        ],
         // windows系统相关配置
         win: {
           // 应用图标路径（Windows 系统中 icon 需要 256 * 256 的 ico 格式图片）

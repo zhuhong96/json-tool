@@ -2,6 +2,7 @@
 import { ipcMain} from 'electron';
 import read from './common/read';
 import reader from './common/reader';
+import JSPatch from './common/JSPatch';
 
 export default (win:any)=>{
     // 窗口最小化
@@ -27,5 +28,6 @@ export default (win:any)=>{
 
     read(win);
     reader(win);
+    // JSPatch(win);
 
 }

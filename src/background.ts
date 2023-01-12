@@ -6,15 +6,19 @@ import { createProtocol } from 'vue-cli-plugin-electron-builder/lib';
 const isDevelopment = process.env.NODE_ENV !== 'production';
 const path = require("path");
 import host from '@/host/index';
+const { autoUpdater } = require("electron-updater");
+import JSPatch from './host/common/JSPatch';
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
-])
+]);
+
+let win:any;
 
 async function createWindow() {
   // Create the browser window.
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 1000,
     height: 600,
     minWidth: 800,
@@ -83,7 +87,13 @@ app.on('ready', async () => {
       console.error('Vue Devtools failed to install:', e.toString())
     }
   }
-  createWindow()
+  createWindow();
+  JSPatch(win);
+  // 检测是否有更新
+  setTimeout(() => {
+    console.log(789);
+    autoUpdater.checkForUpdates();
+  }, 5000);
 })
 
 // Exit cleanly on request from parent process in development mode.
