@@ -1,5 +1,8 @@
 
   ![avatar](./src/assets/login-icon.png#pic_center)
+  
+ 
+ [软件安装包下载](https://zhuhong.xyz/public/json-toll/dist.zip)
 
 
 # json-tool
