@@ -1,6 +1,6 @@
 {
-  "name": "poetry-electron",
-  "version": "1.0.0",
+  "name": "json-tool",
+  "version": "0.0.8",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -26,6 +26,7 @@
     "vuex": "^4.0.0",
     "xlsx": "^0.18.5"
   },
+  "author": "zhuhong",
   "devDependencies": {
     "@types/electron-devtools-installer": "^2.2.0",
     "@typescript-eslint/eslint-plugin": "^5.4.0",

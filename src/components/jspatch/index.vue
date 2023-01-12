@@ -1,24 +1,17 @@
 <template>
-  <div class="home">
+  <div class="jspatch">
     <el-dialog
-      title="应用更新......"
+      title="JSON工具更新中......"
       v-model="showUpdater"
       :close-on-click-modal="false"
       :close-on-press-escape="true"
       :show-close="false"
-      width="620px"
+      width="40%"
       top="26vh"
       center
     >
       <template v-if="downloadProcess">
-        <p>
-          {{
-            "当前:" +
-            downloadProcess.transferred +
-            "   /   共" +
-            downloadProcess.total
-          }}
-        </p>
+        <p> {{`当前：【${downloadProcess.transferred}】 / 共【${downloadProcess.total}】`}}</p>
         <el-progress
           :text-inside="true"
           :stroke-width="18"
@@ -37,13 +30,13 @@ import { ipcRenderer } from "electron";
 import { ElMessage ,ElMessageBox } from 'element-plus';
 
 export default defineComponent({
-  name: "",
+  name: "Jspatch",
   setup(props: any, { emit }: { emit: any }) {
     const data = reactive({
       showUpdater: false,
       downloadProcess: {
-        percent:0,
-        speed:0,
+        percent: 10,
+        speed: 0,
         transferred:'1kb',
         total:"2M"
       },
@@ -54,14 +47,14 @@ export default defineComponent({
       /*
        * 这儿会监听，如果info.version比现在版本小；就会触发；反之，不会触发
        */
-      ElMessageBox.confirm(`发现有新版本【v${info.version}】，是否更新?`, "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        closeOnClickModal: false,
-        type: "warning",
-      }).then(() => {
-        ipcRenderer.send("autoUpdater-toDownload");
-      });
+      // ElMessageBox.confirm(`发现有新版本【v${info.version}】，是否更新?`, "提示", {
+      //   confirmButtonText: "确定",
+      //   cancelButtonText: "取消",
+      //   closeOnClickModal: false,
+      //   type: "warning",
+      // }).then(() => {
+      //   ipcRenderer.send("autoUpdater-toDownload");
+      // });
     });
     // 下载进度
     ipcRenderer.on("autoUpdater-progress", (event, process) => {
@@ -95,14 +88,16 @@ export default defineComponent({
     });
     // 下载完成
     ipcRenderer.once("autoUpdater-downloaded", () => {
-      ElMessageBox.confirm(`更新完成，是否关闭应用程序安装新版本?`, "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        closeOnClickModal: false,
-        type: "warning",
-      }).then(() => {
-        ipcRenderer.send("exit-app");
-      });
+      data.showUpdater = false;
+      // ipcRenderer.send("exit-app");
+      // ElMessageBox.confirm(`更新完成，是否关闭应用程序安装新版本?`, "提示", {
+      //   confirmButtonText: "确定",
+      //   cancelButtonText: "取消",
+      //   closeOnClickModal: false,
+      //   type: "warning",
+      // }).then(() => {
+      //   ipcRenderer.send("exit-app");
+      // });
     });
     return {
       ...toRefs(data),
@@ -112,4 +107,13 @@ export default defineComponent({
 </script>
 
 <style scoped lang='less'>
+.jspatch {
+  /deep/ .el-dialog__header {
+    font-weight: 700;
+
+    .el-dialog__title {
+      color: #00adb5;
+    }
+  }
+}
 </style>

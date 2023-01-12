@@ -62,7 +62,6 @@ export default (win:any)=>{
 
   // 检测是否有更新
   setTimeout(() => {
-    console.log(789);
     autoUpdater.checkForUpdates();
   }, 5000);
 
