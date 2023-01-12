@@ -1,6 +1,6 @@
 # json-tool
 
-![avatar]([./src/assets/login-icon.png]#pic_center)
+![avatar](./src/assets/login-icon.png#pic_center)
 
 ### original idea
 
