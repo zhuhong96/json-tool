@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 const Layout = () => import('@/layout/index.vue');
 const Table = () => import('@/views/table/index.vue');
 const DbFile = () => import('@/views/db-file/index.vue');
+const Excel = () => import('@/views/excel/index.vue');
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -24,6 +25,14 @@ const routes: Array<RouteRecordRaw> = [
         component: DbFile,
         meta: {
           title: 'db',
+        },
+      },
+      {
+        path: '/excel',
+        name: 'excel',
+        component: Excel,
+        meta: {
+          title: 'excel',
         },
       }
     ],

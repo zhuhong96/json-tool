@@ -4,12 +4,15 @@
     v-for="(side, index) in sideList" :key="index"
     @click="onSidebarOut(side)"
     >
-      <el-icon size="36px" :color="side.path == $route.name ? '#00adb5' : sideColor" 
+      <el-icon size="30px" :color="side.path == $route.name ? '#00adb5' : sideColor" 
         v-if="side.path == 'table'" >
         <Grid /></el-icon>
-      <el-icon size="36px" :color="side.path == $route.name ? '#00adb5' : sideColor"
+      <el-icon size="30px" :color="side.path == $route.name ? '#00adb5' : sideColor"
       v-if="side.path == 'dbFile'"
       ><Folder /></el-icon>
+      <el-icon size="30px" :color="side.path == $route.name ? '#00adb5' : sideColor"
+      v-if="side.path == 'excel'"
+      ><Histogram /></el-icon>
       <div :class="['sidebar-list-title',side.path == $route.name ? '' : 'sidebar-list-title-active']">
         {{side.title}}</div>
     </div>
@@ -29,7 +32,8 @@ export default defineComponent({
     const data = reactive({
       sideList:[
         {title:'JSON转excel',id:1,path:'table'},
-        {title:'JSON转db文件',id:2,path:'dbFile'},
+        {title:'excel转JSON',id:2,path:'excel'},
+        {title:'JSON转db',id:3,path:'dbFile'},
       ],
       sideColor:'#393e46',
     });
@@ -64,8 +68,8 @@ export default defineComponent({
     border-radius: 6px;
     padding: 10px 8px;
     cursor: pointer;
-    width: 100px;
-    height: 80px;
+    width: 80px;
+    height: 60px;
     background-color: #eeeeee;
 
     &:nth-child(1) {
@@ -73,7 +77,7 @@ export default defineComponent({
     }
 
     .sidebar-list-title {
-      font-size: 14px;
+      font-size: 12px;
     }
 
     .sidebar-list-title-active {
