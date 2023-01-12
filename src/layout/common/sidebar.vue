@@ -28,7 +28,7 @@ export default defineComponent({
     const Router = useRouter();
     const data = reactive({
       sideList:[
-        {title:'JSON转表格',id:1,path:'table'},
+        {title:'JSON转excel',id:1,path:'table'},
         {title:'JSON转db文件',id:2,path:'dbFile'},
       ],
       sideColor:'#393e46',
