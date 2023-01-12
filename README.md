@@ -1,6 +1,16 @@
-# poetry-electron
+# json-tool
 
-## Project setup
+### original idea
+
+> Convert the json single file to the db database and then save it locally using sqlite3
+
+
+### describe
+* Json-tool is a desktop application developed by electrion, vue3 and typescript that converts json files into excel tables and exports them to XLSX format
+* Json-tool can also convert excel files to json
+* ...
+
+### Project setup
 ```
 yarn install
 ```

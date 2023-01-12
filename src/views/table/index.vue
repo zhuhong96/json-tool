@@ -151,7 +151,9 @@ export default defineComponent({
       html = `<table style="border-collapse: collapse;">`;
       data.table = [];
       const table:any = document.querySelector('table');
-      table.remove();
+      if (table) {
+        table.remove();
+      };
       data.isTableShoww = true;
       
     };
