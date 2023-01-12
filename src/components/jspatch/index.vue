@@ -2,7 +2,7 @@
   <div class="home">
     <el-dialog
       title="应用更新......"
-      :visible="showUpdater"
+      v-model="showUpdater"
       :close-on-click-modal="false"
       :close-on-press-escape="true"
       :show-close="false"
@@ -22,6 +22,7 @@
         <el-progress
           :text-inside="true"
           :stroke-width="18"
+          status="warning"
           :percentage="downloadProcess.percent"
         ></el-progress>
         <p>正在下载({{ downloadProcess.speed }})......</p>
@@ -40,7 +41,12 @@ export default defineComponent({
   setup(props: any, { emit }: { emit: any }) {
     const data = reactive({
       showUpdater: false,
-      downloadProcess: null,
+      downloadProcess: {
+        percent:0,
+        speed:0,
+        transferred:'1kb',
+        total:"2M"
+      },
     });
     // 发现新版本 once
     ipcRenderer.on("autoUpdater-canUpdate", (event, info) => {

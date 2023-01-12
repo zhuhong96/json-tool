@@ -14,9 +14,9 @@ module.exports = defineConfig({
     electronBuilder: {
       nodeIntegration: true,
       // 设置应用主进程的入口
-      // mainProcessFile: "src/main/main.js",
+      mainProcessFile: "src/background.ts",
       // 设置应用渲染进程的入口
-      // rendererProcessFile: "src/renderer/main.js",
+      rendererProcessFile: "src/main.ts",
       customFileProtocol: "../",
       // 打包选项
       builderOptions: {

@@ -5,16 +5,20 @@ const { autoUpdater } = require("electron-updater");
 autoUpdater.autoDownload = true; // 是否自动更新
 autoUpdater.autoInstallOnAppQuit = true // APP退出的时候自动安装
 
+/*
+  * 在开启更新监听事件之前设置
+  * 一定要保证该地址下面包含lasted.yml文件和需要更新的exe文件
+  */
+autoUpdater.setFeedURL({
+  provider: 'generic',
+  url: 'https://zhuhong.xyz/public/json-tool',
+});
 
 export default (win:any)=>{ 
-  /*
-    * 在开启更新监听事件之前设置
-    * 一定要保证该地址下面包含lasted.yml文件和需要更新的exe文件
-    */
-  autoUpdater.setFeedURL({
-    provider: 'generic',
-    url: process.env.VUE_APP_HOT_UPDATE,
-  })
+  // autoUpdater.setFeedURL({
+  //   provider: 'generic',
+  //   url: process.env.VUE_APP_HOT_UPDATE,
+  // })
   
   // 发送消息给渲染线程
   function sendStatusToWindow(status?:any, params?:any) {
@@ -55,5 +59,11 @@ export default (win:any)=>{
   ipcMain.on('monitor-update-system',()=>{
     autoUpdater.checkForUpdates()
   })
+
+  // 检测是否有更新
+  setTimeout(() => {
+    console.log(789);
+    autoUpdater.checkForUpdates();
+  }, 5000);
 
 }

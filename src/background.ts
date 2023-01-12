@@ -89,11 +89,6 @@ app.on('ready', async () => {
   }
   createWindow();
   JSPatch(win);
-  // 检测是否有更新
-  setTimeout(() => {
-    console.log(789);
-    autoUpdater.checkForUpdates();
-  }, 5000);
 })
 
 // Exit cleanly on request from parent process in development mode.

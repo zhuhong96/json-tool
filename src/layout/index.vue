@@ -14,6 +14,7 @@
         <router-view :key="key" />
       </div>
     </main>
+    <HotUpdate/>
   </div>
 </template>
 
@@ -22,12 +23,14 @@ import HeaderItem from "@/layout/common/header-item.vue";
 import Sidebar from "@/layout/common/sidebar.vue";
 import { defineComponent, reactive, toRefs } from "vue";
 import { useRoute } from 'vue-router';
+import HotUpdate from "@/components/jspatch/index.vue";
 
 export default defineComponent({
   name: "",
   components: {
     HeaderItem,
     Sidebar,
+    HotUpdate,
   },
   setup(props: any, { emit }: { emit: any }) {
     const data = reactive({});
