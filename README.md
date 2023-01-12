@@ -1,6 +1,6 @@
 # json-tool
 
-![avatar](http://baidu.com/pic/doge.png)
+![avatar](./src/assets/login-icon.png)
 
 ### original idea
 
