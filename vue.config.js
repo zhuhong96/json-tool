@@ -1,4 +1,10 @@
-const { defineConfig } = require('@vue/cli-service')
+const { defineConfig } = require('@vue/cli-service');
+const path = require("path");
+
+function resolve(dir) {
+  return path.join(__dirname, dir);
+}
+
 module.exports = defineConfig({
   transpileDependencies: true,
   lintOnSave:false,
@@ -26,7 +32,7 @@ module.exports = defineConfig({
         publish: [
           {
             provider: "generic",
-            url: process.env.VUE_APP_HOT_UPDATE, // 根目录
+            url: 'https://zhuhong.xyz/public/json-tool', // 根目录
           },
         ],
         // windows系统相关配置

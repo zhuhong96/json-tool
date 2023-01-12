@@ -6,7 +6,6 @@ import { createProtocol } from 'vue-cli-plugin-electron-builder/lib';
 const isDevelopment = process.env.NODE_ENV !== 'production';
 const path = require("path");
 import host from '@/host/index';
-const { autoUpdater } = require("electron-updater");
 import JSPatch from './host/common/JSPatch';
 
 // Scheme must be registered before the app is ready
