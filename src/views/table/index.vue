@@ -131,7 +131,6 @@ export default defineComponent({
       }
       html += "</table>";
 
-      // console.log(html);
 
       table && (table.innerHTML = html);
     };

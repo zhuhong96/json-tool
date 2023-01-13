@@ -16,6 +16,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'table',
         component: Table,
         meta: {
+          keepAlive: true,
           title: '表格',
         },
       },
@@ -24,6 +25,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'dbFile',
         component: DbFile,
         meta: {
+          keepAlive: true,
           title: 'db',
         },
       },
@@ -32,6 +34,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'excel',
         component: Excel,
         meta: {
+          keepAlive: true,
           title: 'excel',
         },
       }

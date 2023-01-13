@@ -1,70 +1,58 @@
 <template>
-  <div>
-    <div class="table-file-upload">
-      <UploadFile type="excel"/>
+  <div class="excel">
+    <TableHtml
+    :fileName="fileName"
+    :isTableShow="isTableShow"
+    type="excel-json"
+    @setTableUploadShow="setTableUploadShow"/>
+    <div class="excel-upload" v-if="isTableShow">
+      <UploadFile type="excel-json" @setUploadChange="setUploadChange"/>
     </div>
-    <button @click="setDeriveJson">导出json</button>
+    <!-- <button @click="setDeriveJson">导出json</button> -->
   </div>
 </template>
 
 <script lang='ts'>
-import { ipcRenderer } from "electron";
 import { defineComponent, reactive, toRefs } from "vue";
-import Utils from "@/utils/index";
-import meansJs from "meansjs";
 import UploadFile from '@/components/upload/index.vue';
+import TableHtml from '@/components/table-html/index.vue';
 
 export default defineComponent({
   name: "",
   components:{
-    UploadFile
+    UploadFile,TableHtml
   },
   setup(props: any, { emit }: { emit: any }) {
     const data = reactive({
-      excelData:''
+      isTableShow: true,
+      fileName:""
     });
 
-    ipcRenderer.on("reader-excel-file-data", (event, value) => {
-      let list =
-        meansJs.meJstype(value) === "string" ? JSON.parse(value) : value;
+    // 切换上传我表格显示
+    const setTableUploadShow = (show:boolean) => {
+      data.isTableShow = show;
+    };
 
-      let title = [] as any;
-      let excel = [] as any;
-      let isExcelShow = true;
-      
-      for(const i in list) {
-        const listName = list[i];
-        let fields = {} as any;
-
-        for(const n in listName) {
-          if (i == '0') {
-            title.push(listName[n]);
-            isExcelShow = false;
-          }else {
-            isExcelShow = true;
-            const nameN = title[n];
-            fields[nameN] = listName[n];
-          }
-        };
-
-        if(!isExcelShow) continue;
-        excel.push(fields);
-      }
-      data.excelData = JSON.stringify(excel);
-    });
-
-    const setDeriveJson = () => {
-      Utils.dataToJSONFile(data.excelData,'12');
+    // 监听上传文件
+    const setUploadChange = (fileName:string) =>{
+      const fileIndex = fileName.lastIndexOf('.');
+      data.fileName = fileName.substring(0,fileIndex);
+      setTableUploadShow(false);
     };
 
     return {
       ...toRefs(data),
-      setDeriveJson,
-      
+      setUploadChange,
+      setTableUploadShow
     };
   },
 });
 </script>
 
 <style scoped lang='less'>
+.excel {
+  height: 100%;
+  background-color: #fff;
+
+}
 </style>
