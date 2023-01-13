@@ -59,12 +59,15 @@ export default defineComponent({
   setup(props: any, { emit }: { emit: any }) {
     const data = reactive({
       excelData: [] as [],
+      html:`` as string
     });
     const { fileName } = toRefs(props);
-    let html = `<table style="border-collapse: collapse;">`;
+    // let html = `<table style="border-collapse: collapse;">`;
     // 渲染页面模块
     const tableHtml = (listData: []) => {
       const table = document.querySelector(".table");
+
+      data.html = `<table style="border-collapse: collapse;">`;
 
       let headerShow = true;
 
@@ -77,8 +80,8 @@ export default defineComponent({
         // 标题头部
         if (isObj && headerShow) {
           const objectList: any = list[i] as {};
-          html += `<tr>`;
-          html +=
+          data.html += `<tr>`;
+          data.html +=
             `
           <td style="border: 1px solid #393e46; min-width: 40px;
           outline: none;padding: 10px; font-size: 16px;
@@ -88,21 +91,21 @@ export default defineComponent({
             "</td>";
           for (const n in objectList) {
             if (i == "0" && headerShow) {
-              html += `
+              data.html += `
               <th style="border: 1px solid #393e46; font-weight:700;
               outline: none;padding: 10px;
               ">${n}</th>
               `;
             }
           }
-          html += "</tr>";
+          data.html += "</tr>";
           headerShow = false;
         }
 
-        html += `<tr>`;
+        data.html += `<tr>`;
 
         // 索引
-        html += `
+        data.html += `
         <td style="border: 1px solid #393e46; min-width: 40px;
           color: #222831;outline: none;padding: 10px;
         "> ${Number(i) + 1} </td>
@@ -111,18 +114,18 @@ export default defineComponent({
         if (isObj) {
           const objectList: any = list[i] as {};
           for (const n in objectList) {
-            html += `<td
+            data.html += `<td
             style="border: 1px solid #393e46;min-width: 50px;
             color: #222831; font-size: 14px;outline: none;padding: 10px;
             ">${objectList[n]}</td>`;
           }
         }
 
-        html += "</tr>";
+        data.html += "</tr>";
       }
-      html += "</table>";
+      data.html += "</table>";
 
-      table && (table.innerHTML = html);
+      table && (table.innerHTML = data.html);
     };
 
     // 接收Excel文件
@@ -170,12 +173,13 @@ export default defineComponent({
 
     // 重置
     const setReset = () => {
-      html = `<table style="border-collapse: collapse;">`;
+      data.html = `<table style="border-collapse: collapse;">`;
       data.excelData = [];
       const table: any = document.querySelector("table");
       if (table) {
         table.remove();
-      }
+      };
+      
       emit("setTableUploadShow", true);
     };
 
@@ -197,7 +201,7 @@ export default defineComponent({
       try {
         FileSaver.saveAs(
           new Blob([wbout], { type: "application/octet-stream" }),
-          `${fileName}.xlsx`
+          `${fileName.value}.xlsx`
         );
       } catch (e) {
         if (typeof console !== "undefined") {

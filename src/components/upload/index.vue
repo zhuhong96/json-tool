@@ -59,8 +59,8 @@ export default defineComponent({
         ipcRenderer.send("reader-excel-file", file.raw.path);
       }else if (p.type.value == "json-excel") { // json转表格
         if (!['json'].includes(fileType.toString())) return ElMessage.error('请上传JSON单文件');
+        ipcRenderer.send("reader-json-file", file.raw.path);
       }
-      console.log(789);
       
       emit('setUploadChange',file.name);
     };
